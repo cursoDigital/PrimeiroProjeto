@@ -11,7 +11,7 @@ import ModalCategory from "../InputsModal/ModalCategory";
 import ButtonGreen from "../Button/ButtonGreen";
 
 export default function ModalNewTransaction() {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-10">
@@ -33,16 +33,16 @@ export default function ModalNewTransaction() {
                     Cadastrar transação
                   </DialogTitle>
                   <div className="mt-2 w-full">
-                    <ModalTitle></ModalTitle>
-                    <ModalPrice></ModalPrice>
+                    <ModalTitle/>
+                    <ModalPrice/>
                   </div>
                   <div className='flex w-full justify-end'>
-                    <ModalButtonUp icon={<ArrowCircleUp className="text-green-500 h-6" size={32} />}></ModalButtonUp>
-                    <ModalButtonDown icon={<ArrowCircleDown className="text-red-500 h-6" size={32} />}></ModalButtonDown>
+                    <ModalButtonUp icon={<ArrowCircleUp className="text-green-500 h-6" size={32} />}/>
+                    <ModalButtonDown icon={<ArrowCircleDown className="text-red-500 h-6" size={32} />}/>
                   </div>
                   <div>
-                    <ModalCategory></ModalCategory>
-                    <ButtonGreen></ButtonGreen>
+                    <ModalCategory/>
+                    <ButtonGreen/>
                   </div>
                 </div>
               </div>

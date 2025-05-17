@@ -7,9 +7,10 @@ function LoginPage() {
   let navigate = useNavigate();
 
   function handleSubmit() {
+
     setTimeout(function() {
       window.location.href = "/transactions";
-    }, 500); // Redirect after 3 seconds
+    }, 500); // Redirect after 0.5 seconds
   }
 
   return (
@@ -73,6 +74,7 @@ function LoginPage() {
             <label
               for="input-password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              id="Senha"
             >
               Password
             </label>

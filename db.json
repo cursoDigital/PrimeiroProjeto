@@ -1,0 +1,11 @@
+{"transactions": [
+{
+    "id":"1",
+    "title":"Netflix",
+    "price":55.9,
+    "type":"debit",
+    "category":"Entretenimento",
+    "data":"17/05/2025"
+}
+]
+}
