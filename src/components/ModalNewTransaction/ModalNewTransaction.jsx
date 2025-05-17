@@ -9,10 +9,42 @@ import ModalTitle from "../InputsModal/ModalTitle";
 import ModalPrice from "../InputsModal/ModalPrice";
 import ModalCategory from "../InputsModal/ModalCategory";
 import ButtonGreen from "../Button/ButtonGreen";
+import axios from "axios";
 
-export default function ModalNewTransaction() {
-  const [open, setOpen] = useState(false)
+export default function ModalNewTransaction({ open, setOpen }) {
+
+  const [title, setTitle] = useState("")
+  const [price, setPrice] = useState(0);
+  const [category, setCategory] = useState("")
+  const [transactionType, setTransactionType ] = useState("deposit")
+
+  function handleClickTransactionType(type) {
+    setTransactionType(type)
+  }
+  function handleChangeCategory (ev) {
+    setCategory(ev)
+    console.log(category)
+  }
+  function handleChangePrice(ev) {
+    setPrice(ev)
+    console.log(price)
+  }
+  function handleChangeTitle(ev) {
+    setTitle(ev)
+    console.log(title)
+  }
   
+  async function handleNewTransaction() {
+    await axios.post("http://localhost:3000/transactions", {
+      title,
+      price: Number(price),
+      category,
+      transactionType,
+      date: "17/05/2025"
+    });
+
+    setOpen(false)
+  }
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-10">
       <DialogBackdrop
@@ -28,21 +60,21 @@ export default function ModalNewTransaction() {
           >
             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div className="">
-                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left ">
                   <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
                     Cadastrar transação
                   </DialogTitle>
                   <div className="mt-2 w-full">
-                    <ModalTitle/>
-                    <ModalPrice/>
+                    <ModalTitle handleChangeTitle={handleChangeTitle}/>
+                    <ModalPrice handleChangePrice={handleChangePrice}/>
                   </div>
                   <div className='flex w-full justify-end'>
-                    <ModalButtonUp icon={<ArrowCircleUp className="text-green-500 h-6" size={32} />}/>
+                    <ModalButtonUp handleClickTransactionType={handleClickTransactionType} icon={<ArrowCircleUp className="text-green-500 h-6" size={32} />}/>
                     <ModalButtonDown icon={<ArrowCircleDown className="text-red-500 h-6" size={32} />}/>
                   </div>
                   <div>
-                    <ModalCategory/>
-                    <ButtonGreen/>
+                    <ModalCategory handleChangeCategory={handleChangeCategory}/>
+                    <ButtonGreen handleNewTransaction={handleNewTransaction}/>
                   </div>
                 </div>
               </div>

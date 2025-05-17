@@ -1,11 +1,20 @@
-{"transactions": [
 {
-    "id":"1",
-    "title":"Netflix",
-    "price":55.9,
-    "type":"debit",
-    "category":"Entretenimento",
-    "data":"17/05/2025"
-}
-]
+  "transactions": [
+    {
+      "id": "1",
+      "title": "Netflix",
+      "price": 55.9,
+      "type": "debit",
+      "category": "Entretenimento",
+      "date": "17/05/2025"
+    },
+    {
+      "id": "0dc9",
+      "title": "Salario",
+      "price": 4000,
+      "category": "Salario",
+      "transactionType": "deposit",
+      "date": "17/05/2025"
+    }
+  ]
 }

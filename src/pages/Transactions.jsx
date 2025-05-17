@@ -7,11 +7,16 @@ import { useEffect, useState } from "react";
 function TransactionsPage() {
 
   const [allTransactions, setAllTransactions] = useState([]);
+  const [open, setOpen] = useState(false) 
 
   async function fetchTransactions() {
     const transactions = await axios.get("http://localhost:3000/transactions")
 
     setAllTransactions(transactions.data)
+  }
+
+  function handleOpenModal() {
+    setOpen(true)
   }
 
   useEffect(() => {
@@ -28,7 +33,7 @@ function TransactionsPage() {
             <h1 className="text-white text-xl md:text-2xl font-bold">
               OrçaPro
             </h1>
-            <button className="bg-white/20 px-12 rounded py-2 hover:bg-white/30 text-white border-0">
+            <button className=" cursor-pointer bg-emerald-500 px-12 rounded py-2 hover:bg-white/30 text-white border-0" onClick={handleOpenModal}>
               Nova transação
             </button>
           </div>
@@ -63,15 +68,15 @@ function TransactionsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {allTransactions.map((transaction) => {
+                {allTransactions.map((transaction, index) => {
                   return (
-                  <tr className="hover:bg-gray-50 bg-white">
+                  <tr className="hover:bg-gray-50 bg-white" key={index}>
                   <td className="px-6 py-4">{transaction.title}</td>
                   <td className="px-6 py-4 text-green-500 font-medium">
                     {transaction.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL"})}
                   </td>
                   <td className="px-6 py-4">{transaction.category}</td>
-                  <td className="px-6 py-4">{transaction.data}</td>
+                  <td className="px-6 py-4">{transaction.date}</td>
                 </tr>
                   )
                 })}
@@ -79,7 +84,7 @@ function TransactionsPage() {
             </table>
           </div>
 
-          <ModalNewTransaction/>
+          <ModalNewTransaction open={open} setOpen={setOpen} />
         </main>
       </div>
     );
