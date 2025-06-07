@@ -11,8 +11,10 @@ function FormTransaction({ handleChangeCategory,
     handleChangePrice,
     handleChangeTitle,
     handleClickTransactionType,
-    transactionType,
     handleNewTransaction,
+
+    formTitle = "Cadastrar Transação",
+    buttonText = "Cadastrar",
 
     titleValue = "",
     priceValue = "",
@@ -24,7 +26,7 @@ function FormTransaction({ handleChangeCategory,
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left ">
                     <h1
                         className="text-base font-semibold text-gray-900">
-                        Cadastrar transação
+                        {formTitle}
                     </h1>
                     <div className="mt-2 w-full">
                         <ModalTitle handleChangeTitle={handleChangeTitle} titleValue={titleValue} />
@@ -36,7 +38,7 @@ function FormTransaction({ handleChangeCategory,
                     </div>
                     <div>
                         <ModalCategory handleChangeCategory={handleChangeCategory} categoryValue={categoryValue}/>
-                        <ButtonGreen handleNewTransaction={handleNewTransaction} />
+                        <ButtonGreen handleNewTransaction={handleNewTransaction} buttonText={buttonText} />
                     </div>
                 </div>
             </div>

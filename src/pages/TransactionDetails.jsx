@@ -1,17 +1,24 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../components/Header/Header";
 import FormTransaction from "../components/FormTransaction/FormTransaction";
 import axios from "axios";
 import { API_BASE_URL } from "../utils/constants";
 import { useEffect, useState } from "react";
+import { format } from "date-fns";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function TransactionDetails() {
+//Pegar uma transação pelo ID
+
     const { id } = useParams()
+    const navigate = useNavigate()
 
     const [title, setTitle] = useState("")
     const [price, setPrice] = useState(0);
     const [category, setCategory] = useState("")
     const [transactionType, setTransactionType] = useState("deposit")
+
+    const notify = () => toast('Atualizado com sucesso!!');
 
     function handleClickTransactionType(type) {
         setTransactionType(type)
@@ -29,6 +36,7 @@ export default function TransactionDetails() {
         console.log(title)
     }
 
+// Função para buscar uma transação para editar
 
     async function fetchTransactionsId() {
         const transaction = await axios.get(`${API_BASE_URL}/transactions/${id}`)
@@ -37,6 +45,22 @@ export default function TransactionDetails() {
         setPrice(transaction.data.price)
         setCategory(transaction.data.category)
         setTransactionType(transaction.data.transactionType)
+    }
+
+    async function handleUpdateTransaction() {
+        try {
+            await axios.put(`${API_BASE_URL}/transactions/${id}`, {
+                title,
+                price: Number(price),
+                category,
+                transactionType,
+                date: format(new Date(), "dd/MM/yyyy")
+            })
+            notify()
+            navigate("/transactions")
+        } catch (error) {
+            console.error("Ops, algo deu errado:", error)
+        }
     }
 
     useEffect(() => {
@@ -56,7 +80,10 @@ export default function TransactionDetails() {
                     handleChangeCategory={handleChangeCategory}
                     handleClickTransactionType={handleClickTransactionType}
                     transactionType={transactionType}
-                    handleNewTransaction={() => {}}
+                    handleNewTransaction={handleUpdateTransaction}
+
+                    buttonText="Atualizar"
+                    formTitle="Atualizar Transação"
                 />
             </main>
         </div>
