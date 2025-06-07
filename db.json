@@ -1,19 +1,27 @@
 {
   "transactions": [
     {
-      "id": "1",
-      "title": "Netflix",
-      "price": 55.9,
-      "type": "debit",
-      "category": "Entretenimento",
+      "id": "be3b",
+      "title": "teste",
+      "price": 123,
+      "category": "teste",
+      "transactionType": "deposit",
       "date": "17/05/2025"
     },
     {
-      "id": "0dc9",
-      "title": "Salario",
-      "price": 4000,
-      "category": "Salario",
+      "id": "d1c0",
+      "title": "teste",
+      "price": 1231,
+      "category": "teste",
       "transactionType": "deposit",
+      "date": "17/05/2025"
+    },
+    {
+      "id": "44b2",
+      "title": "Celular",
+      "price": 2500,
+      "category": "Tecnologia",
+      "transactionType": "withdraw",
       "date": "17/05/2025"
     }
   ]

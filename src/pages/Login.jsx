@@ -7,7 +7,6 @@ function LoginPage() {
   let navigate = useNavigate();
 
   function handleSubmit() {
-
     setTimeout(function() {
       window.location.href = "/transactions";
     }, 500); // Redirect after 0.5 seconds

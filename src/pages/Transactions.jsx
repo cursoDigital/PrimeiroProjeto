@@ -3,6 +3,8 @@ import CardTransactions from "../components/CardTransaction/CardTransaction";
 import ModalNewTransaction from "../components/ModalNewTransaction/ModalNewTransaction";
 import axios from "axios"
 import { useEffect, useState } from "react";
+import Header from "../components/Header/Header";
+import { useNavigate } from "react-router-dom";
 
 function TransactionsPage() {
 
@@ -23,37 +25,55 @@ function TransactionsPage() {
     fetchTransactions()
   }, [])
   
+    const depositsResult = allTransactions.reduce((prev, current) => {
+    if (current.transactionType === "deposit") {
+      return prev + current.price;
+    }
+
+    return prev;
+  }, 0);
+
+  const withdrawsResult = allTransactions.reduce((prev, current) => {
+    if (current.transactionType === "withdraw") {
+      return prev + current.price;
+    }
+
+    return prev;
+  }, 0);
+
+  const total = depositsResult - withdrawsResult;
+
+   const navigate = useNavigate();
+  
+  function handleEditTransaction(id) {
+    navigate("/transactions/" + id);
+  }
+  
   console.log(allTransactions)
 
 
     return (
       <div className="min-h-screen flex flex-col bg-gray-100">
-        <header className="w-full bg-pink-700 py-6 pb-32 px-4 md:px-10">
-          <div className="container mx-auto flex justify-between items-center">
-            <h1 className="text-white text-xl md:text-2xl font-bold">
-              OrçaPro
-            </h1>
-            <button className=" cursor-pointer bg-emerald-500 px-12 rounded py-2 hover:bg-white/30 text-white border-0" onClick={handleOpenModal}>
-              Nova transação
-            </button>
-          </div>
-        </header>
+       <Header handleOpenModal={handleOpenModal} />
         <main className="flex-1 container mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 -mt-24">
             <CardTransactions 
             title="Entradas" 
             background="bg-white" 
+            amount={depositsResult}
             icon={<ArrowCircleUp className="text-green-500" size={32} />}/>
 
             <CardTransactions 
             title="Saídas" 
             background="bg-white" 
+            amount={withdrawsResult}
             icon={<ArrowCircleDown className="text-red-500" size={32} />}/>
 
             <CardTransactions 
             title="Total" 
             background="bg-emerald-500" 
             textColor="text-white" 
+            amount={total}
             icon={<CurrencyDollar size={32} />}/>
           </div>
   
@@ -68,18 +88,27 @@ function TransactionsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {allTransactions.map((transaction, index) => {
-                  return (
-                  <tr className="hover:bg-gray-50 bg-white" key={index}>
-                  <td className="px-6 py-4">{transaction.title}</td>
-                  <td className="px-6 py-4 text-green-500 font-medium">
-                    {transaction.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL"})}
-                  </td>
-                  <td className="px-6 py-4">{transaction.category}</td>
-                  <td className="px-6 py-4">{transaction.date}</td>
-                </tr>
-                  )
-                })}
+                 {allTransactions.map((transaction, index) => {
+                return (
+                  <tr
+                    className="cursor-pointer bg-white"
+                    key={index}
+                    onClick={() => {
+                      handleEditTransaction(transaction.id);
+                    }}
+                  >
+                    <td className="px-6 py-4">{transaction.title}</td>
+                    <td className="px-6 py-4 text-green-500 font-medium">
+                      {transaction.price.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      })}
+                    </td>
+                    <td className="px-6 py-4">{transaction.category}</td>
+                    <td className="px-6 py-4">{transaction.date}</td>
+                  </tr>
+                );
+              })}
               </tbody>
             </table>
           </div>

@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css'
 import LoginPage from './pages/Login';
 import TransactionsPage from './pages/Transactions';
-import ModalNewTransaction from './components/ModalNewTransaction/ModalNewTransaction';
+import TransactionDetails from './pages/TransactionDetails';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -12,7 +12,8 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path='/' element={<LoginPage/>} />
         <Route path='/transactions' element={<TransactionsPage/>}/>
+        <Route path='/transactions/:id' element={<TransactionDetails/>} />
       </Routes>
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )
