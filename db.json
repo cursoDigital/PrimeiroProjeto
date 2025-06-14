@@ -1,22 +1,6 @@
 {
   "transactions": [
     {
-      "title": "teste",
-      "price": 1231,
-      "category": "teste",
-      "transactionType": "deposit",
-      "date": "07/06/2025",
-      "id": "d1c0"
-    },
-    {
-      "id": "44b2",
-      "title": "Celular",
-      "price": 2500,
-      "category": "Tecnologia",
-      "transactionType": "withdraw",
-      "date": "17/05/2025"
-    },
-    {
       "id": "b7a2",
       "title": "Teste",
       "price": 250,

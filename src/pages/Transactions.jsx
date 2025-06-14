@@ -42,7 +42,7 @@ function TransactionsPage() {
     try {
       await axios.delete(`${API_BASE_URL}/transactions/${id}`);
       setTransacoes((prev) => prev.filter((t) => t.id !== id));
-      fetchTransactions()
+      notify()
     } catch (error) {
       console.error("Erro ao excluir:", error);
     }
@@ -145,9 +145,9 @@ function TransactionsPage() {
                           e.stopPropagation()
                           console.log("Edit transaction", transaction.id)
                         }}
-                       
+
                       >
-                        
+
                         <Eraser //Para editar, apenas redirecionei para um componente que já existia
                           size={25}
                           onClick={(e) => {
