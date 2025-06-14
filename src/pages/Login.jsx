@@ -16,7 +16,7 @@ function LoginPage() {
     // Container
     <main className="w-full h-screen flex">
       {/* Esquerda */}
-      <div className="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 w-1/2 h-full flex flex-col justify-center items-center text-white gap-4">
+      <div className="bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-500 w-1/2 h-full flex flex-col justify-center items-center text-white gap-4">
         <img
           src={LoginImage}
           alt="Imagem ilustrativa de login"

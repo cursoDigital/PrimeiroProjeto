@@ -69,7 +69,7 @@ export default function TransactionDetails() {
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
-            <Header />
+            <Header/>
             <main className="max-w-3xl mx-auto px-6 py-8 -mt-24 bg-white rounded-lg shadow-lg">
                 <FormTransaction
                     titleValue={title}

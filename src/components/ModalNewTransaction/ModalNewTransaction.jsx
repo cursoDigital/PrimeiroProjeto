@@ -11,12 +11,12 @@ export default function ModalNewTransaction({ open, setOpen }) {
   const [title, setTitle] = useState("")
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("")
-  const [transactionType, setTransactionType ] = useState("deposit")
+  const [transactionType, setTransactionType] = useState("deposit")
 
   function handleClickTransactionType(type) {
     setTransactionType(type)
   }
-  function handleChangeCategory (ev) {
+  function handleChangeCategory(ev) {
     setCategory(ev)
     console.log(category)
   }
@@ -28,7 +28,7 @@ export default function ModalNewTransaction({ open, setOpen }) {
     setTitle(ev)
     console.log(title)
   }
-  
+
   async function handleNewTransaction() {
     await axios.post("http://localhost:3000/transactions", {
       title,
@@ -53,13 +53,17 @@ export default function ModalNewTransaction({ open, setOpen }) {
             transition
             className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
           >
-          <FormTransaction 
-          handleChangeTitle={handleChangeTitle} 
-          handleChangePrice={handleChangePrice} 
-          handleClickTransactionType={handleClickTransactionType} 
-          handleChangeCategory={handleChangeCategory} 
-          handleNewTransaction={handleNewTransaction}
-          />
+            <FormTransaction
+              handleChangeTitle={handleChangeTitle}
+              handleChangePrice={handleChangePrice}
+              handleClickTransactionType={handleClickTransactionType}
+              handleChangeCategory={handleChangeCategory}
+              handleNewTransaction={handleNewTransaction}
+              titleValue={title}
+              priceValue={price}
+              categoryValue={category}
+              transactionType={transactionType}
+            />
 
           </DialogPanel>
         </div>
