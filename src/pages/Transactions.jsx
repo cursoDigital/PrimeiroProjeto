@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import { useTransactionContext } from "../contexts/TransactionContext";
 import { API_BASE_URL } from "../utils/constants";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
 
@@ -16,6 +16,16 @@ function TransactionsPage() {
   const notify = () => toast('Excluido com sucesso!!');
   const [transactionToEdit, setTransactionToEdit] = useState(null);
 
+
+   const {
+    allTransactions,
+    setAllTransactions,
+    handleEditTransaction,
+    depositsResult,
+    withdrawsResult,
+    total
+  } = useTransactionContext();
+
   // Para excluir uma transação
   useEffect(() => {
     searchTransactions();
@@ -24,6 +34,8 @@ function TransactionsPage() {
   const searchTransactions = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/transactions`);
+
+      setAllTransactions(response.data)
     } catch (error) {
       console.error("Erro ao buscar itens:", error);
     }
@@ -47,14 +59,7 @@ function TransactionsPage() {
   };
 
   // Até aqui - Para excluir uma transação
-  const {
-    allTransactions,
-    setAllTransactions,
-    handleEditTransaction,
-    depositsResult,
-    withdrawsResult,
-    total
-  } = useTransactionContext();
+ 
 
   async function fetchTransactions() {
     const transactions = await axios.get("http://localhost:3000/transactions")
