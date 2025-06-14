@@ -24,7 +24,6 @@ function TransactionsPage() {
   const searchTransactions = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/transactions`);
-      setTransactions(response.data);
     } catch (error) {
       console.error("Erro ao buscar itens:", error);
     }
@@ -41,7 +40,6 @@ function TransactionsPage() {
 
     try {
       await axios.delete(`${API_BASE_URL}/transactions/${id}`);
-      setTransacoes((prev) => prev.filter((t) => t.id !== id));
       notify()
     } catch (error) {
       console.error("Erro ao excluir:", error);
