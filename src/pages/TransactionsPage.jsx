@@ -10,68 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function TransactionsPage() {
-  const [open, setOpen] = useState(false)
-  const navigate = useNavigate();
-  const [transactionToEdit, setTransactionToEdit] = useState(null);
-
-   const {
-    allTransactions,
-    setAllTransactions,
-    handleEditTransaction,
-    depositsResult,
-    withdrawsResult,
-    total
-  } = useTransactionContext();
-
-  // Para excluir uma transação
-  useEffect(() => {
-    searchTransactions();
-  }, []);
-
-  const searchTransactions = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/transactions`);
-
-      setAllTransactions(response.data)
-    } catch (error) {
-      console.error("Erro ao buscar itens:", error);
-    }
-  };
-
-  const deleteTransactions = async (id) => {
-    if (!id) {
-      console.error("ID indefinido!");
-      return;
-    }
-
-    const confirmar = window.confirm("Deseja realmente excluir esta transação?");
-    if (!confirmar) return;
-
-    try {
-      await axios.delete(`${API_BASE_URL}/transactions/${id}`);
-      notify()
-    } catch (error) {
-      console.error("Erro ao excluir:", error);
-    }
-  };
-
-  // Até aqui - Para excluir uma transação
  
-
-  async function fetchTransactions() {
-    const transactions = await axios.get("http://localhost:3000/transactions")
-
-    setAllTransactions(transactions.data)
-  }
-
-  function handleOpenModal() {
-    setOpen(true)
-  }
-
-  useEffect(() => {
-    fetchTransactions()
-  }, [])
-
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
       <Header handleOpenModal={handleOpenModal} />
