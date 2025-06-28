@@ -6,16 +6,13 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import { useTransactionContext } from "../contexts/TransactionContext";
 import { API_BASE_URL } from "../utils/constants";
-import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
 
 function TransactionsPage() {
   const [open, setOpen] = useState(false)
   const navigate = useNavigate();
-  const notify = () => toast('Excluido com sucesso!!');
   const [transactionToEdit, setTransactionToEdit] = useState(null);
-
 
    const {
     allTransactions,
