@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css'
 import LoginPage from './pages/Login';
-import TransactionsPage from './pages/Transactions';
 import TransactionDetails from './pages/TransactionDetails';
 import { TransactionProvider } from './contexts/TransactionContext';
+import TransactionsPage from './pages/TransactionsPage';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
